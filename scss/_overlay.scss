@@ -1,0 +1,110 @@
+/* ====================================================
+                     OVERLAY
+=======================================================*/
+.overlay {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(darken($text,60%), 0.4);
+    backdrop-filter: blur(2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal { // actual pop-up ----------------------------->
+    position: relative;
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 2px;
+    text-align: left;
+    position: relative;
+    transform: scale(.9);
+    width: 80vw;
+    @include mq(768px) {
+        padding: 70px 50px;
+        width: 370px;
+        transform: scale(1);
+    }
+    &_info {
+        width: 100%;
+    }
+    &:hover &_close{
+        opacity: 1;
+    }
+    &_close { // x button
+        position: absolute;
+        top: 5px;
+        right: 8px;
+        width: 30px;
+        height: 30px;
+        opacity: 0;
+        transition: opacity .2s;
+        cursor: pointer;
+        img {
+            width: 100%;
+        }
+    }
+    &_arrow { // left/right arrow SVG
+        pointer-events: all;
+        fill: transparent;
+        height: 30px;
+        width: 30px;
+        transform-origin: 50% 50%;
+        transform-box: fill-box;
+        cursor: pointer;
+        @include mq(768px) {
+        }
+        &-right {
+            transform: rotate(180deg);
+        }
+    }
+    &_button { //left-right arrow SVG CONTAINER
+        position: absolute;
+        top: 45%;
+        &-left {
+            left: -50px;
+            @include mq(768px) {
+                left: -80px;
+            }
+        }
+        &-right {
+            right: -50px;
+            @include mq(768px) {
+                right: -80px;
+            }
+        }
+    }
+    &_content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &_avatar {
+        border-radius: 50%;
+        margin-bottom: 30px;
+    }
+    hr {
+        margin: 10px 0;
+    }
+    p {
+        color: $text;
+        font-size: .8rem;
+    }
+}
+
+// <!--pointer-events useful for assigning event listener
+// https://www.smashingmagazine.com/2018/05/svg-interaction-pointer-events-property/--> 
+#arrow path {
+    pointer-events: none;
+    fill: $bg;
+}
+
+.hidden, #arrow-svg {
+    display: none;
+}
